@@ -1,0 +1,13 @@
+<% form_for :tweet,:url => {:action => "create" } do |f| %>
+<%=f.text_area :body,:cols => 50,:rows => 3 %>
+<br>
+<%=submit_tag "Tweet" %>
+<% end %>
+
+<% @me.timelines.each do |tl| %>
+<div class="tweet">
+<div class="user_name"><%=link_to tl.tweet.user.name,:action => "user",:id => tl.tweet.user.name %></div>
+<div class="body"><%= tl.tweet.body %></div>
+<div class="date"><%= tl.tweet.created_at %></div>
+</div>
+<% end %>

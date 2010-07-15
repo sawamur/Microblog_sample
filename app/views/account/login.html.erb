@@ -1,0 +1,15 @@
+<h1>Account#login</h1>
+<p>Find me in app/views/account/login.html.erb</p>
+
+<% form_for :user,:url => {:action => "authorize" } do |f| %>
+NAME:<br>
+<%=f.text_field :name %>
+<br>
+PASSWD:<br>
+<%=f.password_field :passwd %>
+<br>
+<%=submit_tag "Login" %>
+<% end %>
+
+
+<%=button_to "Sign-Up",:action => "new" %>

@@ -1,0 +1,12 @@
+<h1><%=@user.name %></h1>
+
+<% unless @me.id == @user.id %>
+ <%=button_to "Follow",:controller => "account",:action => "follow",:id => @user.id %>
+<% end %>
+
+<% @user.tweets.each do |tw| %>
+<div class="tweet">
+<div class="body"><%= tw.body %></div>
+<div class="date"><%= tw.created_at %></div>
+</div>
+<% end %>

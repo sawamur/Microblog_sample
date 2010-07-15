@@ -1,0 +1,44 @@
+
+body {
+  background-color: #88ddff;
+}
+
+h2 {
+  margin: 0;
+}
+
+.header {
+  width: 700px;
+  margin: 10px auto;
+}
+
+.login_name {
+  float:right;
+}
+
+.content {
+  width: 680px;
+  background-color:white;
+  padding: 10px 10px;
+  margin: 10px auto;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+.tweet {
+  border-top: 1px dotted gray;
+}
+
+.user_name {
+  font-weight: bold;
+  color: blue;
+}
+
+.user_name a {
+  color: blue;
+}
+
+.date {
+  font-size: 0.8em;
+  text-align: right;
+}

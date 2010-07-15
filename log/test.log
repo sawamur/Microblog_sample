@@ -1,0 +1,80 @@
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("schema_migrations")[0m
+  [4;36;1mSQL (1.8ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100714094310)
+  [4;35;1mSQL (0.6ms)[0m   [0mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "passwd" varchar(255), "bio" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100714094310')[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("users")[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "created_at", "updated_at", "bio", "passwd") VALUES('masaki', '2010-07-14 10:05:57', '2010-07-14 10:05:57', NULL, NULL)[0m
+  [4;36;1mTweet Create (0.1ms)[0m   [0;1mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 10:05:57', 'hoge!', '2010-07-14 10:05:57', 980190963)[0m
+  [4;35;1mTimeline Create (0.1ms)[0m   [0mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(980190963, '2010-07-14 10:05:57', '2010-07-14 10:05:57', 980190963)[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "created_at", "updated_at", "bio", "passwd") VALUES('masaki', '2010-07-14 10:07:23', '2010-07-14 10:07:23', NULL, NULL)[0m
+  [4;36;1mTweet Create (0.1ms)[0m   [0;1mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 10:07:23', 'hoge!', '2010-07-14 10:07:23', 980190963)[0m
+  [4;35;1mTimeline Create (0.2ms)[0m   [0mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(980190963, '2010-07-14 10:07:23', '2010-07-14 10:07:23', 980190963)[0m
+  [4;36;1mTimeline Load (0.2ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines"."user_id" = 980190963 AND "timelines"."tweet_id" = 980190963) ORDER BY timelines.id DESC LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "created_at", "updated_at", "bio", "passwd") VALUES('masaki', '2010-07-14 10:07:50', '2010-07-14 10:07:50', NULL, NULL)[0m
+  [4;36;1mTweet Create (0.3ms)[0m   [0;1mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 10:07:50', 'hoge!', '2010-07-14 10:07:50', 980190963)[0m
+  [4;35;1mTimeline Load (0.1ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines"."user_id" = 980190963 AND "timelines"."tweet_id" = 980190963) ORDER BY timelines.id DESC LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "created_at", "updated_at", "bio", "passwd") VALUES('masaki', '2010-07-14 10:08:20', '2010-07-14 10:08:20', NULL, NULL)[0m
+  [4;36;1mTweet Create (0.2ms)[0m   [0;1mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 10:08:20', 'hoge!', '2010-07-14 10:08:20', 980190963)[0m
+  [4;35;1mTimeline Create (0.2ms)[0m   [0mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(980190963, '2010-07-14 10:08:20', '2010-07-14 10:08:20', 980190963)[0m
+  [4;36;1mTimeline Load (0.2ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines"."user_id" = 980190963 AND "timelines"."tweet_id" = 980190963) ORDER BY timelines.id DESC LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "created_at", "updated_at", "bio", "passwd") VALUES('masaki', '2010-07-14 10:10:30', '2010-07-14 10:10:30', NULL, NULL)[0m
+  [4;36;1mTweet Create (0.1ms)[0m   [0;1mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 10:10:30', 'hoge!', '2010-07-14 10:10:30', 980190963)[0m
+  [4;35;1mTimeline Create (0.2ms)[0m   [0mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(980190963, '2010-07-14 10:10:30', '2010-07-14 10:10:30', 980190963)[0m
+  [4;36;1mTimeline Load (0.3ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines"."user_id" = 980190963 AND "timelines"."tweet_id" = 980190963) ORDER BY timelines.id DESC LIMIT 1[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSELECT count(*) AS count_all FROM "timelines" WHERE ("timelines".user_id = 980190963) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'Masaki') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "created_at", "updated_at", "bio", "passwd") VALUES('Masaki', '2010-07-14 11:10:29', '2010-07-14 11:10:29', NULL, NULL)[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'Yukihiko') LIMIT 1[0m
+  [4;35;1mUser Create (0.1ms)[0m   [0mINSERT INTO "users" ("name", "created_at", "updated_at", "bio", "passwd") VALUES('Yukihiko', '2010-07-14 11:10:29', '2010-07-14 11:10:29', NULL, NULL)[0m
+  [4;36;1mConnection Create (0.1ms)[0m   [0;1mINSERT INTO "connections" ("created_at", "updated_at", "from_id", "to_id") VALUES('2010-07-14 11:10:29', '2010-07-14 11:10:29', 980190963, 980190964)[0m
+  [4;35;1mConnection Create (0.1ms)[0m   [0mINSERT INTO "connections" ("created_at", "updated_at", "from_id", "to_id") VALUES('2010-07-14 11:10:29', '2010-07-14 11:10:29', 980190963, 980190964)[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'Masaki') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "created_at", "updated_at", "bio", "passwd") VALUES('Masaki', '2010-07-14 11:10:43', '2010-07-14 11:10:43', NULL, NULL)[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'Yukihiko') LIMIT 1[0m
+  [4;35;1mUser Create (0.1ms)[0m   [0mINSERT INTO "users" ("name", "created_at", "updated_at", "bio", "passwd") VALUES('Yukihiko', '2010-07-14 11:10:43', '2010-07-14 11:10:43', NULL, NULL)[0m
+  [4;36;1mConnection Load (0.2ms)[0m   [0;1mSELECT "connections".id FROM "connections" WHERE ("connections"."to_id" = 980190964 AND "connections".from_id = 980190963) LIMIT 1[0m
+  [4;35;1mConnection Create (0.1ms)[0m   [0mINSERT INTO "connections" ("created_at", "updated_at", "from_id", "to_id") VALUES('2010-07-14 11:10:43', '2010-07-14 11:10:43', 980190963, 980190964)[0m
+  [4;36;1mConnection Load (0.1ms)[0m   [0;1mSELECT "connections".id FROM "connections" WHERE ("connections"."to_id" = 980190964 AND "connections".from_id = 980190963 AND "connections".id <> 980190963) LIMIT 1[0m
+  [4;35;1mConnection Load (0.2ms)[0m   [0mSELECT "connections".id FROM "connections" WHERE ("connections"."to_id" = 980190964 AND "connections".from_id = 980190963) LIMIT 1[0m
+  [4;36;1mConnection Load (0.1ms)[0m   [0;1mSELECT "connections".id FROM "connections" WHERE ("connections"."to_id" = 980190964 AND "connections".from_id = 980190963) LIMIT 1[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'Masaki') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "created_at", "updated_at", "bio", "passwd") VALUES('Masaki', '2010-07-14 11:14:31', '2010-07-14 11:14:31', NULL, NULL)[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'Yukihiko') LIMIT 1[0m
+  [4;35;1mUser Create (0.1ms)[0m   [0mINSERT INTO "users" ("name", "created_at", "updated_at", "bio", "passwd") VALUES('Yukihiko', '2010-07-14 11:14:31', '2010-07-14 11:14:31', NULL, NULL)[0m
+  [4;36;1mConnection Load (0.1ms)[0m   [0;1mSELECT * FROM "connections" WHERE ("connections"."id" = '--- :fisrt
+' AND ("connections"."to_id" = 980190964 AND "connections"."from_id" = 980190963)) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'Masaki') LIMIT 1[0m
+  [4;35;1mUser Create (0.3ms)[0m   [0mINSERT INTO "users" ("name", "created_at", "updated_at", "bio", "passwd") VALUES('Masaki', '2010-07-14 11:14:49', '2010-07-14 11:14:49', NULL, NULL)[0m
+  [4;36;1mUser Load (0.1ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'Yukihiko') LIMIT 1[0m
+  [4;35;1mUser Create (0.1ms)[0m   [0mINSERT INTO "users" ("name", "created_at", "updated_at", "bio", "passwd") VALUES('Yukihiko', '2010-07-14 11:14:49', '2010-07-14 11:14:49', NULL, NULL)[0m
+  [4;36;1mConnection Load (0.1ms)[0m   [0;1mSELECT * FROM "connections" WHERE ("connections"."to_id" = 980190964 AND "connections"."from_id" = 980190963) LIMIT 1[0m
+  [4;35;1mConnection Load (0.2ms)[0m   [0mSELECT "connections".id FROM "connections" WHERE ("connections"."to_id" = 980190964 AND "connections".from_id = 980190963) LIMIT 1[0m
+  [4;36;1mConnection Create (0.1ms)[0m   [0;1mINSERT INTO "connections" ("created_at", "updated_at", "from_id", "to_id") VALUES('2010-07-14 11:14:49', '2010-07-14 11:14:49', 980190963, 980190964)[0m
+  [4;35;1mConnection Load (0.1ms)[0m   [0mSELECT "connections".id FROM "connections" WHERE ("connections"."to_id" = 980190964 AND "connections".from_id = 980190963 AND "connections".id <> 980190963) LIMIT 1[0m
+  [4;36;1mConnection Load (0.2ms)[0m   [0;1mSELECT * FROM "connections" WHERE ("connections"."to_id" = 980190964 AND "connections"."from_id" = 980190963) LIMIT 1[0m

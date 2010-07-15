@@ -1,0 +1,6 @@
+class User < ActiveRecord::Base
+  validates_uniqueness_of :name
+  has_many :tweets,:order => "id desc"
+  has_many :timelines,:order => "tweet_id desc"
+  
+end

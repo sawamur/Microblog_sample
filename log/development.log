@@ -1,0 +1,2069 @@
+  [4;36;1mSQL (0.2ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mselect sqlite_version(*)[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("schema_migrations")[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100714094310)
+  [4;35;1mSQL (0.6ms)[0m   [0mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "passwd" varchar(255), "bio" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100714094310')[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.0ms)[0m   [0;1mPRAGMA index_list("users")[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+Migrating to CreateUsers (20100714094310)
+Migrating to CreateTweets (20100714094709)
+  [4;36;1mSQL (0.1ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mCREATE TABLE "tweets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "body" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100714094709')[0m
+Migrating to CreateTimelines (20100714094737)
+  [4;35;1mSQL (0.5ms)[0m   [0mCREATE TABLE "timelines" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "tweet_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100714094737')[0m
+Migrating to CreateConnections (20100714094801)
+  [4;35;1mSQL (0.5ms)[0m   [0mCREATE TABLE "connections" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "from_id" integer, "to_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mINSERT INTO schema_migrations (version) VALUES ('20100714094801')[0m
+  [4;35;1mSQL (1.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSELECT version FROM schema_migrations[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("connections")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("timelines")[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mPRAGMA index_list("tweets")[0m
+  [4;35;1mSQL (0.0ms)[0m   [0mPRAGMA index_list("users")[0m
+  [4;36;1mSQL (2.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "created_at", "updated_at", "bio", "passwd") VALUES('masaki', '2010-07-14 09:52:47', '2010-07-14 09:52:47', NULL, 'masaki')[0m
+  [4;36;1mTweet Create (0.4ms)[0m   [0;1mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 09:53:17', '1st tweet', '2010-07-14 09:53:17', 1)[0m
+  [4;35;1mTweet Create (0.4ms)[0m   [0mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 09:53:23', '2nd tweet', '2010-07-14 09:53:23', 1)[0m
+  [4;36;1mTweet Load (0.5ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets".user_id = 1) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mTweet Load (0.4ms)[0m   [0;1mSELECT * FROM "tweets" [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'yukihiko') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "created_at", "updated_at", "bio", "passwd") VALUES('yukihiko', '2010-07-14 09:57:47', '2010-07-14 09:57:47', NULL, 'yukihiko')[0m
+  [4;36;1mConnection Create (0.4ms)[0m   [0;1mINSERT INTO "connections" ("created_at", "updated_at", "from_id", "to_id") VALUES('2010-07-14 09:58:11', '2010-07-14 09:58:11', 1, 2)[0m
+  [4;35;1mConnection Load (0.4ms)[0m   [0mSELECT * FROM "connections" ORDER BY connections.id DESC LIMIT 1[0m
+  [4;36;1mConnection Load (0.5ms)[0m   [0;1mSELECT * FROM "connections" ORDER BY connections.id DESC LIMIT 1[0m
+  [4;35;1mConnection Load (0.5ms)[0m   [0mSELECT * FROM "connections" ORDER BY connections.id DESC LIMIT 1[0m
+  [4;36;1mUser Load (1.1ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 2) [0m
+  [4;35;1mConnection Load (0.5ms)[0m   [0mSELECT * FROM "connections" ORDER BY connections.id DESC LIMIT 1[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.7ms)[0m   [0;1mCREATE TABLE "connections" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "from_id" integer, "to_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1mCREATE TABLE "timelines" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "tweet_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.4ms)[0m   [0;1mCREATE TABLE "tweets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "body" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.4ms)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "passwd" varchar(255), "bio" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.9ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("schema_migrations")[0m
+  [4;36;1mSQL (3.2ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (2.5ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094801')[0m
+  [4;36;1mSQL (2.4ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094310')[0m
+  [4;35;1mSQL (2.3ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094709')[0m
+  [4;36;1mSQL (2.4ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094737')[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mCREATE TABLE "connections" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "from_id" integer, "to_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1mCREATE TABLE "timelines" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "tweet_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.8ms)[0m   [0;1mCREATE TABLE "tweets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "body" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (3.0ms)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "passwd" varchar(255), "bio" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("schema_migrations")[0m
+  [4;36;1mSQL (2.5ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (2.1ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094801')[0m
+  [4;36;1mSQL (2.5ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094310')[0m
+  [4;35;1mSQL (2.6ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094709')[0m
+  [4;36;1mSQL (2.7ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094737')[0m
+  [4;36;1mSQL (0.7ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.3ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1mCREATE TABLE "connections" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "from_id" integer, "to_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mCREATE TABLE "timelines" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "tweet_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.7ms)[0m   [0;1mCREATE TABLE "tweets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "body" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "passwd" varchar(255), "bio" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("schema_migrations")[0m
+  [4;36;1mSQL (2.4ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (2.3ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094801')[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094310')[0m
+  [4;35;1mSQL (2.4ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094709')[0m
+  [4;36;1mSQL (3.5ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094737')[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.8ms)[0m   [0;1mCREATE TABLE "connections" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "from_id" integer, "to_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1mCREATE TABLE "timelines" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "tweet_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.5ms)[0m   [0;1mCREATE TABLE "tweets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "body" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.6ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.7ms)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "passwd" varchar(255), "bio" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("schema_migrations")[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (2.3ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094801')[0m
+  [4;36;1mSQL (1.9ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094310')[0m
+  [4;35;1mSQL (2.8ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094709')[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094737')[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mCREATE TABLE "connections" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "from_id" integer, "to_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.4ms)[0m   [0;1mCREATE TABLE "timelines" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "tweet_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (3.1ms)[0m   [0;1mCREATE TABLE "tweets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "body" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "passwd" varchar(255), "bio" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.5ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("schema_migrations")[0m
+  [4;36;1mSQL (3.2ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (2.7ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094801')[0m
+  [4;36;1mSQL (2.4ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094310')[0m
+  [4;35;1mSQL (3.6ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094709')[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094737')[0m
+
+
+Processing AccountController#login (for 127.0.0.1 at 2010-07-14 19:18:08) [GET]
+Rendering account/login
+Completed in 10ms (View: 9, DB: 0) | 200 OK [http://localhost/account/login]
+
+
+Processing AccountController#new (for 127.0.0.1 at 2010-07-14 19:20:11) [GET]
+Rendering account/new
+Completed in 112ms (View: 88, DB: 0) | 200 OK [http://localhost/account/new]
+
+
+Processing AccountController#new (for 127.0.0.1 at 2010-07-14 19:20:18) [GET]
+Rendering account/new
+Completed in 19ms (View: 9, DB: 0) | 200 OK [http://localhost/account/new]
+
+
+Processing AccountController#new (for 127.0.0.1 at 2010-07-14 19:20:27) [GET]
+Rendering account/new
+Completed in 16ms (View: 10, DB: 0) | 200 OK [http://localhost/account/new]
+
+
+Processing AccountController#new (for 127.0.0.1 at 2010-07-14 19:22:09) [GET]
+Rendering account/new
+Completed in 18ms (View: 12, DB: 0) | 200 OK [http://localhost/account/new]
+
+
+Processing AccountController#create (for 127.0.0.1 at 2010-07-14 19:22:37) [POST]
+  Parameters: {"commit"=>"Sign-UP", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "user"=>{"name"=>"brazil", "passwd"=>"brazil"}}
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'brazil') LIMIT 1[0m
+  [4;35;1mUser Create (0.4ms)[0m   [0mINSERT INTO "users" ("name", "created_at", "updated_at", "bio", "passwd") VALUES('brazil', '2010-07-14 10:22:37', '2010-07-14 10:22:37', NULL, 'brazil')[0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT "users".id FROM "users" WHERE ("users"."name" = 'brazil' AND "users".id <> 3) LIMIT 1[0m
+Rendering account/create
+Completed in 22ms (View: 5, DB: 1) | 200 OK [http://localhost/account/create]
+  [4;36;1mUser Load (0.7ms)[0m   [0;1mSELECT * FROM "users" [0m
+
+
+Processing AccountController#login (for 127.0.0.1 at 2010-07-14 19:23:05) [GET]
+Rendering account/login
+Completed in 3ms (View: 1, DB: 0) | 200 OK [http://localhost/account/login]
+
+
+Processing AccountController#login (for 127.0.0.1 at 2010-07-14 19:25:30) [GET]
+Rendering account/login
+Completed in 117ms (View: 110, DB: 0) | 200 OK [http://localhost/account/login]
+
+
+Processing AccountController#authorize (for 127.0.0.1 at 2010-07-14 19:25:37) [POST]
+  Parameters: {"commit"=>"Sign-UP", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "user"=>{"name"=>"brazil", "passwd"=>"brazil"}}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'brazil') LIMIT 1[0m
+Completed in 17ms (View: 1, DB: 0) | 200 OK [http://localhost/account/authorize]
+
+
+Processing AccountController#authorize (for 127.0.0.1 at 2010-07-14 19:25:44) [POST]
+  Parameters: {"commit"=>"Sign-UP", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "user"=>{"name"=>"brazil", "passwd"=>"ddd"}}
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'brazil') LIMIT 1[0m
+Completed in 13ms (View: 1, DB: 0) | 200 OK [http://localhost/account/authorize]
+
+
+Processing AccountController#authorize (for 127.0.0.1 at 2010-07-14 19:25:49) [POST]
+  Parameters: {"commit"=>"Sign-UP", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "user"=>{"name"=>"brazil", "passwd"=>"brazil"}}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'brazil') LIMIT 1[0m
+Completed in 9ms (View: 1, DB: 0) | 200 OK [http://localhost/account/authorize]
+
+
+Processing AccountController#index (for 127.0.0.1 at 2010-07-14 19:26:37) [GET]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering account/index
+Completed in 14ms (View: 6, DB: 0) | 200 OK [http://localhost/account/index]
+
+
+Processing AccountController#index (for 127.0.0.1 at 2010-07-14 19:27:43) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering account/index
+Completed in 16ms (View: 9, DB: 0) | 200 OK [http://localhost/account/index]
+
+
+Processing AccountController#logout (for 127.0.0.1 at 2010-07-14 19:27:44) [POST]
+  Parameters: {"authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA="}
+Redirected to http://localhost:3000/account/login
+Completed in 2ms (DB: 0) | 302 Found [http://localhost/account/logout]
+
+
+Processing AccountController#login (for 127.0.0.1 at 2010-07-14 19:27:44) [GET]
+Rendering account/login
+Completed in 97ms (View: 90, DB: 0) | 200 OK [http://localhost/account/login]
+
+
+Processing AccountController#authorize (for 127.0.0.1 at 2010-07-14 19:27:49) [POST]
+  Parameters: {"commit"=>"Sign-UP", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "user"=>{"name"=>"masaki", "passwd"=>"masaki"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+Completed in 9ms (View: 1, DB: 0) | 200 OK [http://localhost/account/authorize]
+
+
+Processing AccountController#authorize (for 127.0.0.1 at 2010-07-14 19:28:08) [POST]
+  Parameters: {"commit"=>"Sign-UP", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "user"=>{"name"=>"masaki", "passwd"=>"masaki"}}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+Redirected to http://localhost:3000/account
+Completed in 12ms (DB: 0) | 302 Found [http://localhost/account/authorize]
+
+
+Processing AccountController#index (for 127.0.0.1 at 2010-07-14 19:28:08) [GET]
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering account/index
+Completed in 13ms (View: 3, DB: 0) | 200 OK [http://localhost/account]
+
+
+Processing AccountController#logout (for 127.0.0.1 at 2010-07-14 19:28:12) [POST]
+  Parameters: {"authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA="}
+Redirected to http://localhost:3000/account/login
+Completed in 2ms (DB: 0) | 302 Found [http://localhost/account/logout]
+
+
+Processing AccountController#login (for 127.0.0.1 at 2010-07-14 19:28:12) [GET]
+Rendering account/login
+Completed in 12ms (View: 6, DB: 0) | 200 OK [http://localhost/account/login]
+
+
+Processing AccountController#authorize (for 127.0.0.1 at 2010-07-14 19:28:18) [POST]
+  Parameters: {"commit"=>"Sign-UP", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "user"=>{"name"=>"yukihiko", "passwd"=>"yukihiko"}}
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'yukihiko') LIMIT 1[0m
+Redirected to http://localhost:3000/account
+Completed in 10ms (DB: 0) | 302 Found [http://localhost/account/authorize]
+
+
+Processing AccountController#index (for 127.0.0.1 at 2010-07-14 19:28:18) [GET]
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 2) [0m
+Rendering account/index
+Completed in 11ms (View: 4, DB: 0) | 200 OK [http://localhost/account]
+
+
+Processing AccountController#logout (for 127.0.0.1 at 2010-07-14 19:28:21) [POST]
+  Parameters: {"authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA="}
+Redirected to http://localhost:3000/account/login
+Completed in 2ms (DB: 0) | 302 Found [http://localhost/account/logout]
+
+
+Processing AccountController#login (for 127.0.0.1 at 2010-07-14 19:28:21) [GET]
+Rendering account/login
+Completed in 11ms (View: 5, DB: 0) | 200 OK [http://localhost/account/login]
+
+
+Processing AccountController#login (for 127.0.0.1 at 2010-07-14 19:28:50) [GET]
+Rendering account/login
+Completed in 19ms (View: 12, DB: 0) | 200 OK [http://localhost/account/login]
+
+
+Processing AccountController#new (for 127.0.0.1 at 2010-07-14 19:28:52) [POST]
+  Parameters: {"authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA="}
+Rendering account/new
+Completed in 12ms (View: 3, DB: 0) | 200 OK [http://localhost/account/new]
+
+
+Processing AccountController#new (for 127.0.0.1 at 2010-07-14 19:28:55) [POST]
+  Parameters: {"authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA="}
+Rendering account/new
+Completed in 14ms (View: 4, DB: 0) | 200 OK [http://localhost/account/new]
+
+
+Processing AccountController#new (for 127.0.0.1 at 2010-07-14 19:28:56) [POST]
+  Parameters: {"authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA="}
+Rendering account/new
+Completed in 11ms (View: 5, DB: 0) | 200 OK [http://localhost/account/new]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:43:28) [GET]
+Redirected to http://localhost:3000/account/login
+
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  app/controllers/application_controller.rb:13:in `current_user'
+  app/controllers/timeline_controller.rb:7:in `index'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (126.1ms)
+Rendered rescues/_request_and_response (1.3ms)
+Rendering rescues/layout (not_found)
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:43:32) [GET]
+Redirected to http://localhost:3000/account/login
+
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  app/controllers/application_controller.rb:13:in `current_user'
+  app/controllers/timeline_controller.rb:7:in `index'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (39.1ms)
+Rendered rescues/_request_and_response (0.5ms)
+Rendering rescues/layout (not_found)
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:43:37) [GET]
+Redirected to http://localhost:3000/account/login
+
+ActiveRecord::RecordNotFound (Couldn't find User without an ID):
+  app/controllers/application_controller.rb:13:in `current_user'
+  app/controllers/timeline_controller.rb:7:in `index'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (47.7ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (not_found)
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:44:15) [GET]
+Redirected to http://localhost:3000/account/login
+Completed in 96ms (DB: 0) | 302 Found [http://localhost/timeline/index]
+
+
+Processing AccountController#login (for 127.0.0.1 at 2010-07-14 19:44:15) [GET]
+Rendering account/login
+Completed in 24ms (View: 15, DB: 0) | 200 OK [http://localhost/account/login]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:44:23) [GET]
+Redirected to http://localhost:3000/account/login
+Completed in 2ms (DB: 0) | 302 Found [http://localhost/timeline/index]
+
+
+Processing AccountController#login (for 127.0.0.1 at 2010-07-14 19:44:23) [GET]
+Rendering account/login
+Completed in 15ms (View: 5, DB: 0) | 200 OK [http://localhost/account/login]
+
+
+Processing AccountController#authorize (for 127.0.0.1 at 2010-07-14 19:44:31) [POST]
+  Parameters: {"commit"=>"Login", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "user"=>{"name"=>"brazil", "passwd"=>"brazil"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'brazil') LIMIT 1[0m
+Redirected to http://localhost:3000/account
+Completed in 10ms (DB: 0) | 302 Found [http://localhost/account/authorize]
+
+
+Processing AccountController#index (for 127.0.0.1 at 2010-07-14 19:44:31) [GET]
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering account/index
+Completed in 15ms (View: 6, DB: 0) | 200 OK [http://localhost/account]
+
+
+Processing AccountController#index (for 127.0.0.1 at 2010-07-14 19:45:12) [GET]
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering account/index
+Completed in 16ms (View: 8, DB: 0) | 200 OK [http://localhost/account]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:45:14) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering timeline/index
+Completed in 13ms (View: 5, DB: 0) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:45:34) [GET]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering timeline/index
+Completed in 21ms (View: 10, DB: 0) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:46:42) [GET]
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering timeline/index
+Completed in 25ms (View: 9, DB: 0) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:47:47) [GET]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering timeline/index
+ERROR: compiling _run_erb_app47views47timeline47index46html46erb RAISED compile error
+/Users/msawa/Work/microblog/app/views/timeline/index.html.erb:17: syntax error, unexpected kENSURE, expecting kEND
+/Users/msawa/Work/microblog/app/views/timeline/index.html.erb:19: syntax error, unexpected $end, expecting kEND
+Function body:           def _run_erb_app47views47timeline47index46html46erb(local_assigns)
+            old_output_buffer = output_buffer;;@output_buffer = '';  __in_erb_template=true ; @output_buffer.concat "<h1>Timeline#index</h1>\n<p>Find me in app/views/timeline/index.html.erb</p>\n\n"
+
+
+;  form_for :tweet,:url => {:action => "create" } do |f| ; @output_buffer.concat "\n"
+; @output_buffer.concat((f.text_area :body,:cols => 50,:rows => 3 ).to_s); @output_buffer.concat "\n<br>\n"
+
+; @output_buffer.concat((submit_tag ).to_s); @output_buffer.concat "\n"
+;  end ; @output_buffer.concat "\n\n"
+
+;  @me.timelines.each do |tl| ; @output_buffer.concat "\n<div class=\"tweet\">\n<div class=\"user_name\">"
+
+; @output_buffer.concat(( tl.tweet.user.name ).to_s); @output_buffer.concat "</div>\n<div class=\"body\">"
+; @output_buffer.concat(( tl.tweet.body ).to_s); @output_buffer.concat "</div>\n</div>\n"
+
+; @output_buffer.concat " end>\n"
+; @output_buffer
+          ensure
+            self.output_buffer = old_output_buffer
+          end
+Backtrace: /Users/msawa/Work/microblog/app/views/timeline/index.html.erb:19:in `compile!'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_view/renderable.rb:61:in `compile'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_view/renderable.rb:28:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_view/template.rb:205:in `render_template'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_view/base.rb:265:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/base.rb:1250:in `render_for_file'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/base.rb:936:in `render_without_benchmark'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/benchmarking.rb:51:in `render'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.8/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.8/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/benchmarking.rb:51:in `render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/base.rb:1326:in `default_render'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/base.rb:1332:in `perform_action_without_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/filters.rb:617:in `call_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.8/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+/Library/Ruby/Gems/1.8/gems/activesupport-2.3.8/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/rescue.rb:160:in `perform_action_without_flash'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/flash.rb:151:in `perform_action'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/base.rb:532:in `send'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/base.rb:532:in `process_without_filters'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/filters.rb:606:in `process'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/base.rb:391:in `process'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/base.rb:386:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/routing/route_set.rb:438:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/dispatcher.rb:87:in `dispatch'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/dispatcher.rb:121:in `_call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/dispatcher.rb:130:in `build_middleware_stack'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.8/lib/active_record/query_cache.rb:29:in `call'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.8/lib/active_record/query_cache.rb:29:in `call'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.8/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.8/lib/active_record/query_cache.rb:9:in `cache'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.8/lib/active_record/query_cache.rb:28:in `call'
+/Library/Ruby/Gems/1.8/gems/activerecord-2.3.8/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/string_coercion.rb:25:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.1.0/lib/rack/head.rb:9:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.1.0/lib/rack/methodoverride.rb:24:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/params_parser.rb:15:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/session/cookie_store.rb:99:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/failsafe.rb:26:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.1.0/lib/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.1.0/lib/rack/lock.rb:11:in `synchronize'
+/Library/Ruby/Gems/1.8/gems/rack-1.1.0/lib/rack/lock.rb:11:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/dispatcher.rb:114:in `call'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/reloader.rb:34:in `run'
+/Library/Ruby/Gems/1.8/gems/actionpack-2.3.8/lib/action_controller/dispatcher.rb:108:in `call'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.8/lib/rails/rack/static.rb:31:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.1.0/lib/rack/urlmap.rb:47:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.1.0/lib/rack/urlmap.rb:41:in `each'
+/Library/Ruby/Gems/1.8/gems/rack-1.1.0/lib/rack/urlmap.rb:41:in `call'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.8/lib/rails/rack/log_tailer.rb:17:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.1.0/lib/rack/content_length.rb:13:in `call'
+/Library/Ruby/Gems/1.8/gems/rack-1.1.0/lib/rack/handler/webrick.rb:48:in `service'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+/System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+/Library/Ruby/Gems/1.8/gems/rack-1.1.0/lib/rack/handler/webrick.rb:14:in `run'
+/Library/Ruby/Gems/1.8/gems/rails-2.3.8/lib/commands/server.rb:111
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `gem_original_require'
+/Library/Ruby/Site/1.8/rubygems/custom_require.rb:31:in `require'
+script/server:3
+
+ActionView::TemplateError (compile error
+/Users/msawa/Work/microblog/app/views/timeline/index.html.erb:17: syntax error, unexpected kENSURE, expecting kEND
+/Users/msawa/Work/microblog/app/views/timeline/index.html.erb:19: syntax error, unexpected $end, expecting kEND) on line #17 of app/views/timeline/index.html.erb:
+14: </div>
+15: <% end>
+
+    app/views/timeline/index.html.erb:19:in `compile!'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+    /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (133.3ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:47:58) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.3ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) [0m
+Completed in 22ms (View: 11, DB: 1) | 200 OK [http://localhost/timeline]
+
+
+Processing AccountController#logout (for 127.0.0.1 at 2010-07-14 19:48:07) [POST]
+  Parameters: {"authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA="}
+Redirected to http://localhost:3000/account/login
+Completed in 3ms (DB: 0) | 302 Found [http://localhost/account/logout]
+
+
+Processing AccountController#login (for 127.0.0.1 at 2010-07-14 19:48:07) [GET]
+Rendering account/login
+Completed in 11ms (View: 5, DB: 0) | 200 OK [http://localhost/account/login]
+
+
+Processing AccountController#authorize (for 127.0.0.1 at 2010-07-14 19:48:12) [POST]
+  Parameters: {"commit"=>"Login", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "user"=>{"name"=>"masaki", "passwd"=>"masaki"}}
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+Redirected to http://localhost:3000/account
+Completed in 15ms (DB: 0) | 302 Found [http://localhost/account/authorize]
+
+
+Processing AccountController#index (for 127.0.0.1 at 2010-07-14 19:48:12) [GET]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering account/index
+Completed in 11ms (View: 3, DB: 0) | 200 OK [http://localhost/account]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:48:14) [GET]
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.2ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) [0m
+Completed in 108ms (View: 91, DB: 1) | 200 OK [http://localhost/timeline]
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" LIMIT 1[0m
+  [4;36;1mTimeline Load (0.2ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) [0m
+  [4;35;1mTweet Load (0.4ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets".user_id = 1) ORDER BY id desc[0m
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:50:33) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.2ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) [0m
+Completed in 17ms (View: 7, DB: 0) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#create (for 127.0.0.1 at 2010-07-14 19:50:36) [POST]
+  Parameters: {"commit"=>"Save changes", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "tweet"=>{"body"=>"ほげ"}}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Create (0.5ms)[0m   [0;1mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 10:50:36', 'ほげ', '2010-07-14 10:50:36', 1)[0m
+  [4;35;1mTimeline Create (1.1ms)[0m   [0mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(3, '2010-07-14 10:50:36', '2010-07-14 10:50:36', 1)[0m
+Redirected to http://localhost:3000/timeline
+Completed in 50ms (DB: 2) | 302 Found [http://localhost/timeline/create]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:50:36) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.4ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 24ms (View: 12, DB: 1) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#create (for 127.0.0.1 at 2010-07-14 19:50:48) [POST]
+  Parameters: {"commit"=>"Save changes", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "tweet"=>{"body"=>"ああああああいいいいいいいいいい"}}
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Create (0.4ms)[0m   [0mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 10:50:49', 'ああああああいいいいいいいいいい', '2010-07-14 10:50:49', 1)[0m
+  [4;36;1mTimeline Create (0.2ms)[0m   [0;1mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(4, '2010-07-14 10:50:49', '2010-07-14 10:50:49', 1)[0m
+Redirected to http://localhost:3000/timeline
+Completed in 25ms (DB: 1) | 302 Found [http://localhost/timeline/create]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:50:49) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.5ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.4ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 109ms (View: 12, DB: 1) | 200 OK [http://localhost/timeline]
+  [4;36;1mTimeline Load (0.6ms)[0m   [0;1mSELECT * FROM "timelines" [0m
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:51:30) [GET]
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.5ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.2ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.2ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 27ms (View: 12, DB: 1) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:52:11) [GET]
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.5ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.4ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.4ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 34ms (View: 22, DB: 2) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:54:00) [GET]
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.5ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 38ms (View: 27, DB: 2) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:54:48) [GET]
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.4ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 37ms (View: 18, DB: 1) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:54:54) [GET]
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.4ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 28ms (View: 15, DB: 1) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:54:58) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.5ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.5ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (1.0ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 28ms (View: 15, DB: 2) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:56:04) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.4ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 24ms (View: 13, DB: 1) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:56:20) [GET]
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.8ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (1.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 32ms (View: 18, DB: 3) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:56:53) [GET]
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.5ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 28ms (View: 13, DB: 1) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:57:18) [GET]
+  [4;35;1mUser Load (1.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.5ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 28ms (View: 15, DB: 3) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:57:36) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.4ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.2ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 24ms (View: 13, DB: 1) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:57:48) [GET]
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.5ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 34ms (View: 22, DB: 1) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:57:58) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.4ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 32ms (View: 18, DB: 1) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#create (for 127.0.0.1 at 2010-07-14 19:58:05) [POST]
+  Parameters: {"commit"=>"Tweet", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "tweet"=>{"body"=>"スタイルを直した"}}
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Create (0.6ms)[0m   [0;1mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 10:58:05', 'スタイルを直した', '2010-07-14 10:58:05', 1)[0m
+  [4;35;1mTimeline Create (0.2ms)[0m   [0mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(5, '2010-07-14 10:58:05', '2010-07-14 10:58:05', 1)[0m
+Redirected to http://localhost:3000/timeline
+Completed in 31ms (DB: 1) | 302 Found [http://localhost/timeline/create]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:58:05) [GET]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.5ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.4ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 5) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 115ms (View: 103, DB: 2) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#create (for 127.0.0.1 at 2010-07-14 19:58:19) [POST]
+  Parameters: {"commit"=>"Tweet", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "tweet"=>{"body"=>"あああ"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Create (0.5ms)[0m   [0mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 10:58:19', 'あああ', '2010-07-14 10:58:19', 1)[0m
+  [4;36;1mTimeline Create (0.2ms)[0m   [0;1mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(6, '2010-07-14 10:58:19', '2010-07-14 10:58:19', 1)[0m
+Redirected to http://localhost:3000/timeline
+Completed in 27ms (DB: 1) | 302 Found [http://localhost/timeline/create]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:58:19) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.7ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.4ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 6) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.4ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 5) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 33ms (View: 20, DB: 2) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:58:26) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.6ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 6) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.4ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 5) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 34ms (View: 22, DB: 2) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 19:59:07) [GET]
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.6ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 6) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.4ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 5) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.2ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 117ms (View: 104, DB: 2) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:00:10) [GET]
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.6ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.4ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 6) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 5) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.2ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.2ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 39ms (View: 21, DB: 2) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:00:42) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.6ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.4ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 6) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 5) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.2ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.4ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 35ms (View: 22, DB: 2) | 200 OK [http://localhost/timeline]
+
+
+Processing AccountController#logout (for 127.0.0.1 at 2010-07-14 20:00:52) [GET]
+Redirected to http://localhost:3000/account/login
+Completed in 4ms (DB: 0) | 302 Found [http://localhost/account/logout]
+
+
+Processing AccountController#login (for 127.0.0.1 at 2010-07-14 20:00:52) [GET]
+Rendering template within layouts/application
+Rendering account/login
+Completed in 13ms (View: 6, DB: 0) | 200 OK [http://localhost/account/login]
+
+
+Processing AccountController#authorize (for 127.0.0.1 at 2010-07-14 20:00:59) [POST]
+  Parameters: {"commit"=>"Login", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "user"=>{"name"=>"brazil", "passwd"=>"brazil"}}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'brazil') LIMIT 1[0m
+Redirected to http://localhost:3000/account
+Completed in 9ms (DB: 0) | 302 Found [http://localhost/account/authorize]
+
+
+Processing AccountController#index (for 127.0.0.1 at 2010-07-14 20:00:59) [GET]
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering account/index
+Completed in 16ms (View: 3, DB: 0) | 200 OK [http://localhost/account]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:01:01) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.3ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+Completed in 22ms (View: 10, DB: 1) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#create (for 127.0.0.1 at 2010-07-14 20:01:13) [POST]
+  Parameters: {"commit"=>"Tweet", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "tweet"=>{"body"=>"おれはブラジル生まれ！"}}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Create (0.5ms)[0m   [0;1mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 11:01:13', 'おれはブラジル生まれ！', '2010-07-14 11:01:13', 3)[0m
+  [4;35;1mTimeline Create (0.2ms)[0m   [0mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(7, '2010-07-14 11:01:13', '2010-07-14 11:01:13', 3)[0m
+Redirected to http://localhost:3000/timeline
+Completed in 26ms (DB: 1) | 302 Found [http://localhost/timeline/create]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:01:13) [GET]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.4ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.4ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 30ms (View: 18, DB: 1) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#create (for 127.0.0.1 at 2010-07-14 20:01:22) [POST]
+  Parameters: {"commit"=>"Tweet", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "tweet"=>{"body"=>"サッカーならまかせたおえ"}}
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mTweet Create (0.5ms)[0m   [0mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 11:01:22', 'サッカーならまかせたおえ', '2010-07-14 11:01:22', 3)[0m
+  [4;36;1mTimeline Create (0.2ms)[0m   [0;1mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(8, '2010-07-14 11:01:22', '2010-07-14 11:01:22', 3)[0m
+Redirected to http://localhost:3000/timeline
+Completed in 22ms (DB: 1) | 302 Found [http://localhost/timeline/create]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:01:22) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.5ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 30ms (View: 13, DB: 1) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:04:38) [GET]
+  Parameters: {"id"=>"brazil"}
+  [4;35;1mUser Load (0.5ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+
+NameError (undefined local variable or method `param' for #<TimelineController:0x103502478>):
+  app/controllers/timeline_controller.rb:25:in `user'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (37.7ms)
+Rendered rescues/_request_and_response (0.3ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:04:52) [GET]
+  Parameters: {"id"=>"brazil"}
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'brazil') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;36;1mTweet Load (0.4ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets".user_id = 3) ORDER BY id desc[0m
+Completed in 210ms (View: 199, DB: 1) | 200 OK [http://localhost/timeline/user/brazil]
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:04:58) [GET]
+  Parameters: {"id"=>"masaki"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;35;1mTweet Load (0.6ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets".user_id = 1) ORDER BY id desc[0m
+Completed in 20ms (View: 9, DB: 1) | 200 OK [http://localhost/timeline/user/masaki]
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:05:47) [GET]
+  Parameters: {"id"=>"masaki"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;36;1mTweet Load (0.6ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets".user_id = 1) ORDER BY id desc[0m
+Completed in 27ms (View: 15, DB: 1) | 200 OK [http://localhost/timeline/user/masaki]
+
+
+Processing AccountController#follow (for 127.0.0.1 at 2010-07-14 20:05:48) [POST]
+  Parameters: {"authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "id"=>"1"}
+
+ActionController::UnknownAction (No action responded to follow. Actions: authorize, create, current_user, index, logged_in?, login, logout, and new):
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendering rescues/layout (not_found)
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:06:11) [GET]
+  Parameters: {"id"=>"masaki"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;35;1mTweet Load (0.6ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets".user_id = 1) ORDER BY id desc[0m
+Completed in 28ms (View: 15, DB: 1) | 200 OK [http://localhost/timeline/user/masaki]
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:06:18) [GET]
+  Parameters: {"id"=>"brazil"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'brazil') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;36;1mTweet Load (0.4ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets".user_id = 3) ORDER BY id desc[0m
+Completed in 113ms (View: 12, DB: 1) | 200 OK [http://localhost/timeline/user/brazil]
+  [4;36;1mSQL (0.7ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (1.7ms)[0m   [0;1mCREATE TABLE "connections" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "from_id" integer, "to_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mCREATE TABLE "timelines" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "tweet_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mCREATE TABLE "tweets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "body" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.4ms)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "passwd" varchar(255), "bio" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.6ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("schema_migrations")[0m
+  [4;36;1mSQL (2.1ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (2.2ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094801')[0m
+  [4;36;1mSQL (2.7ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094310')[0m
+  [4;35;1mSQL (2.1ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094709')[0m
+  [4;36;1mSQL (3.6ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094737')[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (1.9ms)[0m   [0;1mCREATE TABLE "connections" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "from_id" integer, "to_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1mCREATE TABLE "timelines" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "tweet_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.5ms)[0m   [0;1mCREATE TABLE "tweets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "body" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "passwd" varchar(255), "bio" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.6ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("schema_migrations")[0m
+  [4;36;1mSQL (1.9ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (4.5ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094801')[0m
+  [4;36;1mSQL (1.8ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094310')[0m
+  [4;35;1mSQL (2.2ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094709')[0m
+  [4;36;1mSQL (2.4ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094737')[0m
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:11:02) [GET]
+  Parameters: {"id"=>"brazil"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'brazil') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;35;1mTweet Load (0.9ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets".user_id = 3) ORDER BY id desc[0m
+Completed in 23ms (View: 10, DB: 2) | 200 OK [http://localhost/timeline/user/brazil]
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:11:09) [GET]
+  Parameters: {"id"=>"masaki"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;36;1mTweet Load (0.6ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets".user_id = 1) ORDER BY id desc[0m
+Completed in 31ms (View: 11, DB: 1) | 200 OK [http://localhost/timeline/user/masaki]
+
+
+Processing AccountController#follow (for 127.0.0.1 at 2010-07-14 20:11:11) [POST]
+  Parameters: {"authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "id"=>"1"}
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mConnection Load (0.2ms)[0m   [0mSELECT "connections".id FROM "connections" WHERE ("connections"."to_id" = 1 AND "connections".from_id = 3) LIMIT 1[0m
+  [4;36;1mConnection Create (0.3ms)[0m   [0;1mINSERT INTO "connections" ("created_at", "updated_at", "from_id", "to_id") VALUES('2010-07-14 11:11:11', '2010-07-14 11:11:11', 3, 1)[0m
+  [4;35;1mConnection Load (0.2ms)[0m   [0mSELECT "connections".id FROM "connections" WHERE ("connections"."to_id" = 1 AND "connections".from_id = 3 AND "connections".id <> 2) LIMIT 1[0m
+Redirected to http://localhost:3000/timeline/user/masaki
+Completed in 21ms (DB: 1) | 302 Found [http://localhost/account/follow/1]
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:11:11) [GET]
+  Parameters: {"id"=>"masaki"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;36;1mTweet Load (0.6ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets".user_id = 1) ORDER BY id desc[0m
+Completed in 23ms (View: 11, DB: 1) | 200 OK [http://localhost/timeline/user/masaki]
+
+
+Processing AccountController#follow (for 127.0.0.1 at 2010-07-14 20:11:14) [POST]
+  Parameters: {"authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "id"=>"1"}
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mConnection Load (0.3ms)[0m   [0mSELECT "connections".id FROM "connections" WHERE ("connections"."to_id" = 1 AND "connections".from_id = 3) LIMIT 1[0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT "connections".id FROM "connections" WHERE ("connections"."to_id" = 1 AND "connections".from_id = 3) LIMIT 1[0m
+Completed in 20ms (View: 1, DB: 1) | 200 OK [http://localhost/account/follow/1]
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:11:18) [GET]
+  Parameters: {"id"=>"masaki"}
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;35;1mTweet Load (0.6ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets".user_id = 1) ORDER BY id desc[0m
+Completed in 21ms (View: 10, DB: 1) | 200 OK [http://localhost/timeline/user/masaki]
+
+
+Processing AccountController#follow (for 127.0.0.1 at 2010-07-14 20:11:22) [POST]
+  Parameters: {"authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "id"=>"1"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mConnection Load (0.3ms)[0m   [0;1mSELECT "connections".id FROM "connections" WHERE ("connections"."to_id" = 1 AND "connections".from_id = 3) LIMIT 1[0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT "connections".id FROM "connections" WHERE ("connections"."to_id" = 1 AND "connections".from_id = 3) LIMIT 1[0m
+Completed in 20ms (View: 1, DB: 1) | 200 OK [http://localhost/account/follow/1]
+  [4;36;1mSQL (0.7ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.6ms)[0m   [0;1mCREATE TABLE "connections" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "from_id" integer, "to_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1mCREATE TABLE "timelines" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "tweet_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mCREATE TABLE "tweets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "body" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.7ms)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "passwd" varchar(255), "bio" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.4ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.5ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("schema_migrations")[0m
+  [4;36;1mSQL (2.5ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (2.6ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094801')[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094310')[0m
+  [4;35;1mSQL (2.3ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094709')[0m
+  [4;36;1mSQL (2.2ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094737')[0m
+  [4;36;1mSQL (0.6ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSELECT version FROM schema_migrations[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mselect sqlite_version(*)[0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (3.1ms)[0m   [0;1mCREATE TABLE "connections" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "from_id" integer, "to_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.2ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.0ms)[0m   [0;1mCREATE TABLE "timelines" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "tweet_id" integer, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.7ms)[0m   [0;1mCREATE TABLE "tweets" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "user_id" integer, "body" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.3ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.8ms)[0m   [0;1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar(255), "passwd" varchar(255), "bio" text, "created_at" datetime, "updated_at" datetime) [0m
+  [4;35;1mSQL (0.5ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (2.6ms)[0m   [0;1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [4;35;1mSQL (0.1ms)[0m   [0mPRAGMA index_list("schema_migrations")[0m
+  [4;36;1mSQL (2.3ms)[0m   [0;1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [4;35;1mSQL (0.9ms)[0m   [0m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [4;36;1mSQL (0.1ms)[0m   [0;1mSELECT version FROM "schema_migrations"[0m
+  [4;35;1mSQL (2.6ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094801')[0m
+  [4;36;1mSQL (1.9ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094310')[0m
+  [4;35;1mSQL (2.1ms)[0m   [0mINSERT INTO "schema_migrations" (version) VALUES ('20100714094709')[0m
+  [4;36;1mSQL (2.9ms)[0m   [0;1mINSERT INTO "schema_migrations" (version) VALUES ('20100714094737')[0m
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:15:35) [GET]
+  Parameters: {"id"=>"masaki"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;36;1mConnection Load (0.5ms)[0m   [0;1mSELECT * FROM "connections" WHERE ("connections"."from_id" = 3 AND "connections"."to_id" = 1) LIMIT 1[0m
+  [4;35;1mTweet Load (0.9ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets".user_id = 1) ORDER BY id desc[0m
+Completed in 32ms (View: 21, DB: 2) | 200 OK [http://localhost/timeline/user/masaki]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:15:56) [GET]
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.5ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 119ms (View: 14, DB: 1) | 200 OK [http://localhost/timeline/]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:16:15) [GET]
+Redirected to http://localhost:3000/account/login
+Completed in 7ms (DB: 0) | 302 Found [http://localhost/timeline/]
+
+
+Processing AccountController#login (for 127.0.0.1 at 2010-07-14 20:16:15) [GET]
+Rendering template within layouts/application
+Rendering account/login
+Completed in 17ms (View: 6, DB: 0) | 200 OK [http://localhost/account/login]
+
+
+Processing AccountController#authorize (for 127.0.0.1 at 2010-07-14 20:16:19) [POST]
+  Parameters: {"commit"=>"Login", "authenticity_token"=>"RtoxYoRHWLOmqGs7+mHM0khWlF0iiuZSL/JvkHQHHEg=", "user"=>{"name"=>"masaki", "passwd"=>"masaki"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+Redirected to http://localhost:3000/account
+Completed in 8ms (DB: 0) | 302 Found [http://localhost/account/authorize]
+
+
+Processing AccountController#index (for 127.0.0.1 at 2010-07-14 20:16:19) [GET]
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering account/index
+Completed in 14ms (View: 5, DB: 0) | 200 OK [http://localhost/account]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:16:20) [GET]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.5ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 6) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 5) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 29ms (View: 16, DB: 2) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#create (for 127.0.0.1 at 2010-07-14 20:16:27) [POST]
+  Parameters: {"commit"=>"Tweet", "authenticity_token"=>"RtoxYoRHWLOmqGs7+mHM0khWlF0iiuZSL/JvkHQHHEg=", "tweet"=>{"body"=>"aaa"}}
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Create (0.4ms)[0m   [0mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 11:16:27', 'aaa', '2010-07-14 11:16:27', 1)[0m
+  [4;36;1mTimeline Create (0.2ms)[0m   [0;1mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(9, '2010-07-14 11:16:27', '2010-07-14 11:16:27', 1)[0m
+Redirected to http://localhost:3000/timeline
+Completed in 113ms (DB: 1) | 302 Found [http://localhost/timeline/create]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:16:27) [GET]
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (1.4ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 9) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.2ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 6) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.2ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 5) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.2ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.2ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 31ms (View: 16, DB: 3) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:16:29) [GET]
+  [4;35;1mUser Load (1.1ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.4ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (2.5ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 40ms (View: 17, DB: 4) | 200 OK [http://localhost/timeline/]
+
+
+Processing TimelineController#create (for 127.0.0.1 at 2010-07-14 20:18:53) [POST]
+  Parameters: {"commit"=>"Tweet", "authenticity_token"=>"RtoxYoRHWLOmqGs7+mHM0khWlF0iiuZSL/JvkHQHHEg=", "tweet"=>{"body"=>"ああああいいいいいい"}}
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Create (0.4ms)[0m   [0;1mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 11:18:53', 'ああああいいいいいい', '2010-07-14 11:18:53', 1)[0m
+  [4;35;1mTimeline Create (0.2ms)[0m   [0mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(10, '2010-07-14 11:18:53', '2010-07-14 11:18:53', 1)[0m
+
+ArgumentError (Unknown key(s): condition):
+  app/models/tweet.rb:8:in `after_create'
+  app/controllers/timeline_controller.rb:15:in `create'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (129.8ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing TimelineController#create (for 127.0.0.1 at 2010-07-14 20:19:18) [POST]
+  Parameters: {"commit"=>"Tweet", "authenticity_token"=>"RtoxYoRHWLOmqGs7+mHM0khWlF0iiuZSL/JvkHQHHEg=", "tweet"=>{"body"=>"ああああいいいいいい"}}
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Create (0.5ms)[0m   [0mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 11:19:18', 'ああああいいいいいい', '2010-07-14 11:19:18', 1)[0m
+  [4;36;1mTimeline Create (0.2ms)[0m   [0;1mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(10, '2010-07-14 11:19:18', '2010-07-14 11:19:18', 1)[0m
+  [4;35;1mConnection Load (0.3ms)[0m   [0mSELECT * FROM "connections" WHERE ("connections"."to_id" = 1) [0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+
+NoMethodError (undefined method `craete' for #<Class:0x1034bb7a8>):
+  app/models/tweet.rb:11:in `after_create'
+  app/models/tweet.rb:8:in `each'
+  app/models/tweet.rb:8:in `after_create'
+  app/controllers/timeline_controller.rb:15:in `create'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /System/Library/Frameworks/Ruby.framework/Versions/1.8/usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+
+Rendered rescues/_trace (46.7ms)
+Rendered rescues/_request_and_response (0.4ms)
+Rendering rescues/layout (internal_server_error)
+
+
+Processing TimelineController#create (for 127.0.0.1 at 2010-07-14 20:19:28) [POST]
+  Parameters: {"commit"=>"Tweet", "authenticity_token"=>"RtoxYoRHWLOmqGs7+mHM0khWlF0iiuZSL/JvkHQHHEg=", "tweet"=>{"body"=>"ああああいいいいいい"}}
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Create (0.5ms)[0m   [0;1mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 11:19:28', 'ああああいいいいいい', '2010-07-14 11:19:28', 1)[0m
+  [4;35;1mTimeline Create (0.2ms)[0m   [0mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(10, '2010-07-14 11:19:28', '2010-07-14 11:19:28', 1)[0m
+  [4;36;1mConnection Load (0.3ms)[0m   [0;1mSELECT * FROM "connections" WHERE ("connections"."to_id" = 1) [0m
+  [4;35;1mTimeline Create (0.1ms)[0m   [0mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(10, '2010-07-14 11:19:28', '2010-07-14 11:19:28', 3)[0m
+Redirected to http://localhost:3000/timeline
+Completed in 34ms (DB: 1) | 302 Found [http://localhost/timeline/create]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:19:28) [GET]
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.7ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 1) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.5ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 10) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 9) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 6) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 5) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.4ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 4) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (1.4ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 3) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+Completed in 46ms (View: 30, DB: 4) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:19:32) [GET]
+  [4;36;1mUser Load (1.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.5ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 10) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.4ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 28ms (View: 15, DB: 3) | 200 OK [http://localhost/timeline/]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:20:05) [GET]
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.5ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.4ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 10) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 121ms (View: 107, DB: 2) | 200 OK [http://localhost/timeline/]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:20:43) [GET]
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.5ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 10) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 32ms (View: 16, DB: 2) | 200 OK [http://localhost/timeline/]
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:20:45) [GET]
+  Parameters: {"id"=>"masaki"}
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;36;1mConnection Load (0.3ms)[0m   [0;1mSELECT * FROM "connections" WHERE ("connections"."from_id" = 3 AND "connections"."to_id" = 1) LIMIT 1[0m
+  [4;35;1mTweet Load (0.7ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets".user_id = 1) ORDER BY id desc[0m
+Completed in 23ms (View: 14, DB: 1) | 200 OK [http://localhost/timeline/user/masaki]
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:20:47) [GET]
+  Parameters: {"id"=>"brazil"}
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'brazil') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;36;1mTweet Load (0.4ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets".user_id = 3) ORDER BY id desc[0m
+Completed in 18ms (View: 9, DB: 1) | 200 OK [http://localhost/timeline/user/brazil]
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:20:49) [GET]
+  Parameters: {"id"=>"masaki"}
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'masaki') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;35;1mConnection Load (0.4ms)[0m   [0mSELECT * FROM "connections" WHERE ("connections"."from_id" = 3 AND "connections"."to_id" = 1) LIMIT 1[0m
+  [4;36;1mTweet Load (0.7ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets".user_id = 1) ORDER BY id desc[0m
+Completed in 114ms (View: 105, DB: 2) | 200 OK [http://localhost/timeline/user/masaki]
+
+
+Processing TimelineController#create (for 127.0.0.1 at 2010-07-14 20:22:23) [POST]
+  Parameters: {"commit"=>"Tweet", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "tweet"=>{"body"=>"<script>sss</script>"}}
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Create (0.6ms)[0m   [0;1mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 11:22:23', '<script>sss</script>', '2010-07-14 11:22:23', 3)[0m
+  [4;35;1mTimeline Create (0.2ms)[0m   [0mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(11, '2010-07-14 11:22:23', '2010-07-14 11:22:23', 3)[0m
+  [4;36;1mConnection Load (0.2ms)[0m   [0;1mSELECT * FROM "connections" WHERE ("connections"."to_id" = 3) [0m
+Redirected to http://localhost:3000/timeline
+Completed in 30ms (DB: 1) | 302 Found [http://localhost/timeline/create]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:22:23) [GET]
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;36;1mTimeline Load (0.7ms)[0m   [0;1mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;35;1mTweet Load (0.4ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 11) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mTweet Load (0.4ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 10) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 40ms (View: 26, DB: 3) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:24:53) [GET]
+  [4;36;1mUser Load (1.6ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.6ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 11) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.4ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 10) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 73ms (View: 47, DB: 4) | 200 OK [http://localhost/timeline]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:24:56) [GET]
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.6ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 11) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 10) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 45ms (View: 20, DB: 2) | 200 OK [http://localhost/]
+
+
+Processing AccountController#logout (for 127.0.0.1 at 2010-07-14 20:25:01) [GET]
+Redirected to http://localhost:3000/account/login
+Completed in 3ms (DB: 0) | 302 Found [http://localhost/account/logout]
+
+
+Processing AccountController#login (for 127.0.0.1 at 2010-07-14 20:25:01) [GET]
+Rendering template within layouts/application
+Rendering account/login
+Completed in 20ms (View: 11, DB: 0) | 200 OK [http://localhost/account/login]
+
+
+Processing AccountController#authorize (for 127.0.0.1 at 2010-07-14 20:25:20) [POST]
+  Parameters: {"commit"=>"Login", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "user"=>{"name"=>"yukihiko", "passwd"=>"yukihiko"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'yukihiko') LIMIT 1[0m
+Redirected to http://localhost:3000/account
+Completed in 9ms (DB: 0) | 302 Found [http://localhost/account/authorize]
+
+
+Processing AccountController#index (for 127.0.0.1 at 2010-07-14 20:25:20) [GET]
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) [0m
+Rendering template within layouts/application
+Rendering account/index
+Completed in 20ms (View: 9, DB: 0) | 200 OK [http://localhost/account]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:25:22) [GET]
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 2) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.3ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 2) ORDER BY tweet_id desc[0m
+Completed in 108ms (View: 8, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing AccountController#logout (for 127.0.0.1 at 2010-07-14 20:25:31) [GET]
+Redirected to http://localhost:3000/account/login
+Completed in 2ms (DB: 0) | 302 Found [http://localhost/account/logout]
+
+
+Processing AccountController#login (for 127.0.0.1 at 2010-07-14 20:25:31) [GET]
+Rendering template within layouts/application
+Rendering account/login
+Completed in 11ms (View: 5, DB: 0) | 200 OK [http://localhost/account/login]
+
+
+Processing AccountController#authorize (for 127.0.0.1 at 2010-07-14 20:26:20) [POST]
+  Parameters: {"commit"=>"Login", "authenticity_token"=>"RtoxYoRHWLOmqGs7+mHM0khWlF0iiuZSL/JvkHQHHEg=", "user"=>{"name"=>"brazil", "passwd"=>"brazil"}}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'brazil') LIMIT 1[0m
+Redirected to http://localhost:3000/account
+Completed in 10ms (DB: 0) | 302 Found [http://localhost/account/authorize]
+
+
+Processing AccountController#index (for 127.0.0.1 at 2010-07-14 20:26:20) [GET]
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering account/index
+Completed in 13ms (View: 3, DB: 0) | 200 OK [http://localhost/account]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:26:23) [GET]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.6ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 11) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 10) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 29ms (View: 17, DB: 2) | 200 OK [http://localhost/]
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:26:24) [GET]
+  Parameters: {"id"=>"brazil"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'brazil') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;36;1mTweet Load (0.5ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets".user_id = 3) ORDER BY id desc[0m
+Completed in 103ms (View: 13, DB: 1) | 200 OK [http://localhost/timeline/user/brazil]
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:26:29) [GET]
+  Parameters: {"id"=>"yukihiko"}
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."name" = 'yukihiko') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;35;1mConnection Load (0.2ms)[0m   [0mSELECT * FROM "connections" WHERE ("connections"."to_id" = 2 AND "connections"."from_id" = 3) LIMIT 1[0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets".user_id = 2) ORDER BY id desc[0m
+Completed in 20ms (View: 11, DB: 1) | 200 OK [http://localhost/timeline/user/yukihiko]
+
+
+Processing AccountController#follow (for 127.0.0.1 at 2010-07-14 20:26:31) [POST]
+  Parameters: {"authenticity_token"=>"RtoxYoRHWLOmqGs7+mHM0khWlF0iiuZSL/JvkHQHHEg=", "id"=>"2"}
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 2) [0m
+  [4;35;1mConnection Load (0.4ms)[0m   [0mSELECT "connections".id FROM "connections" WHERE ("connections"."to_id" = 2 AND "connections".from_id = 3) LIMIT 1[0m
+  [4;36;1mConnection Create (0.4ms)[0m   [0;1mINSERT INTO "connections" ("created_at", "updated_at", "from_id", "to_id") VALUES('2010-07-14 11:26:31', '2010-07-14 11:26:31', 3, 2)[0m
+  [4;35;1mConnection Load (0.3ms)[0m   [0mSELECT "connections".id FROM "connections" WHERE ("connections"."to_id" = 2 AND "connections".from_id = 3 AND "connections".id <> 3) LIMIT 1[0m
+Redirected to http://localhost:3000/timeline/user/yukihiko
+Completed in 22ms (DB: 2) | 302 Found [http://localhost/account/follow/2]
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:26:32) [GET]
+  Parameters: {"id"=>"yukihiko"}
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'yukihiko') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;36;1mConnection Load (0.4ms)[0m   [0;1mSELECT * FROM "connections" WHERE ("connections"."to_id" = 2 AND "connections"."from_id" = 3) LIMIT 1[0m
+  [4;35;1mTweet Load (0.2ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets".user_id = 2) ORDER BY id desc[0m
+Completed in 19ms (View: 10, DB: 1) | 200 OK [http://localhost/timeline/user/yukihiko]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:26:35) [GET]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.6ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 11) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 10) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 111ms (View: 98, DB: 2) | 200 OK [http://localhost/]
+
+
+Processing TimelineController#create (for 127.0.0.1 at 2010-07-14 20:26:47) [POST]
+  Parameters: {"commit"=>"Tweet", "authenticity_token"=>"0Jy6ZiMkV8ikAWFZvpKolN5BD9aLNXtaCqo13apf8lA=", "tweet"=>{"body"=>"おれがゆきひこだ！"}}
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 2) [0m
+  [4;35;1mTweet Create (147.5ms)[0m   [0mINSERT INTO "tweets" ("created_at", "body", "updated_at", "user_id") VALUES('2010-07-14 11:26:47', 'おれがゆきひこだ！', '2010-07-14 11:26:47', 2)[0m
+  [4;36;1mTimeline Create (0.2ms)[0m   [0;1mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(12, '2010-07-14 11:26:47', '2010-07-14 11:26:47', 2)[0m
+  [4;35;1mConnection Load (0.4ms)[0m   [0mSELECT * FROM "connections" WHERE ("connections"."to_id" = 2) [0m
+  [4;36;1mTimeline Create (0.1ms)[0m   [0;1mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(12, '2010-07-14 11:26:47', '2010-07-14 11:26:47', 1)[0m
+  [4;35;1mTimeline Create (0.1ms)[0m   [0mINSERT INTO "timelines" ("tweet_id", "created_at", "updated_at", "user_id") VALUES(12, '2010-07-14 11:26:47', '2010-07-14 11:26:47', 3)[0m
+Redirected to http://localhost:3000/
+Completed in 186ms (DB: 149) | 302 Found [http://localhost/timeline/create]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:26:47) [GET]
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 2) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.4ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 2) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 12) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) [0m
+Completed in 29ms (View: 13, DB: 1) | 200 OK [http://localhost/]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:26:49) [GET]
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.6ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 12) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 11) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 10) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 31ms (View: 18, DB: 2) | 200 OK [http://localhost/]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:29:55) [GET]
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.6ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 12) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 11) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 10) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 123ms (View: 23, DB: 3) | 200 OK [http://localhost/]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:29:57) [GET]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.6ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 12) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 11) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 10) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 32ms (View: 18, DB: 3) | 200 OK [http://localhost/]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:29:58) [GET]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.6ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 12) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 11) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 10) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 34ms (View: 20, DB: 3) | 200 OK [http://localhost/]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:31:26) [GET]
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.7ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 12) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 11) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 10) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 116ms (View: 104, DB: 3) | 200 OK [http://localhost/]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:31:29) [GET]
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.6ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 12) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 11) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 10) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 33ms (View: 18, DB: 3) | 200 OK [http://localhost/]
+
+
+Processing TimelineController#user (for 127.0.0.1 at 2010-07-14 20:31:31) [GET]
+  Parameters: {"id"=>"yukihiko"}
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."name" = 'yukihiko') LIMIT 1[0m
+Rendering template within layouts/application
+Rendering timeline/user
+  [4;36;1mConnection Load (0.4ms)[0m   [0;1mSELECT * FROM "connections" WHERE ("connections"."to_id" = 2 AND "connections"."from_id" = 3) LIMIT 1[0m
+  [4;35;1mTweet Load (0.3ms)[0m   [0mSELECT * FROM "tweets" WHERE ("tweets".user_id = 2) ORDER BY id desc[0m
+Completed in 31ms (View: 13, DB: 1) | 200 OK [http://localhost/timeline/user/yukihiko]
+
+
+Processing TimelineController#index (for 127.0.0.1 at 2010-07-14 20:31:33) [GET]
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Rendering template within layouts/application
+Rendering timeline/index
+  [4;35;1mTimeline Load (0.7ms)[0m   [0mSELECT * FROM "timelines" WHERE ("timelines".user_id = 3) ORDER BY tweet_id desc[0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 12) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 2) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 11) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 10) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 1) [0m
+  [4;36;1mTweet Load (0.3ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 8) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+  [4;36;1mTweet Load (0.2ms)[0m   [0;1mSELECT * FROM "tweets" WHERE ("tweets"."id" = 7) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM "users" WHERE ("users"."id" = 3) [0m
+Completed in 32ms (View: 19, DB: 3) | 200 OK [http://localhost/]

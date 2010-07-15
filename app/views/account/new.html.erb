@@ -1,0 +1,13 @@
+<h1>Account#new</h1>
+<p>Find me in app/views/account/new.html.erb</p>
+
+
+<% form_for :user,:url => {:action => "create" } do |f| %>
+NAME:<br>
+<%=f.text_field :name %>
+<br>
+PASSWD:<br>
+<%=f.password_field :passwd %>
+<br>
+<%=submit_tag "Sign-UP" %>
+<% end %>

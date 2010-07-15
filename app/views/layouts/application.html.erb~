@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<%=stylesheet_link_tag "application" %>
+<title>Microblog</title>
+</head>
+<body>
+  <div class="header">
+    <% if @me %>
+    <div class="login_name">
+      Login:<%=@me.name %>
+      <%=link_to "[LOGOUT]",:controller => "account",:action => "logout" %>
+    </div>
+    <% end %>
+
+    
+    <h2>Microblog</h2>
+
+  </div>
+  
+  <div class="content">
+    <%=yield %>
+  </div>
+  
+</body>
+</html>

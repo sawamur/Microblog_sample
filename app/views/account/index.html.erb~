@@ -1,0 +1,10 @@
+<h1>Account#index</h1>
+<p>Find me in app/views/account/index.html.erb</p>
+
+NAME:<%= @user.name %>
+
+<br>
+PASSWD: <%= @user.passwd %>
+<br>
+
+<%=button_to "logout",:action => "logout" %>
